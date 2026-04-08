@@ -16,11 +16,18 @@ from codexslim.parsers.java_driver import JavaParser
 from codexslim.parsers.dotnet_driver import DotNetParser
 from codexslim.parsers.web_driver import WebDriver
 
+from codexslim.parsers.go_driver import GoParser
+from codexslim.parsers.rust_driver import RustParser
+from codexslim.parsers.ruby_driver import RubyParser
+
 _DEFAULT_PARSERS: List[BaseParser] = [
     PythonParser(),
     JavaParser(),
     DotNetParser(),
     WebDriver(),
+    GoParser(),
+    RustParser(),
+    RubyParser(),
 ]
 
 def _build_ext_map(parsers: List[BaseParser]) -> Dict[str, BaseParser]:

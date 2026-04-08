@@ -1,6 +1,6 @@
 # SLIM.md — CodexSlim manifest
 
-> 15 files · 68.6% token savings
+> 18 files · 71.0% token savings
 
 ## `__init__.py`
 
@@ -193,6 +193,11 @@ f
 om codexslim.parsers.dotnet_driver import DotNetParser
 f
 om codexslim.parsers.web_driver import WebDriver
+om codexslim.parsers.go_driver import GoParser
+f
+om codexslim.parsers.rust_driver import RustParser
+f
+om codexslim.parsers.ruby_driver import RubyParser
 
 def uild_ext_map(parsers: List[BaseParser]) - -> ct[str, BaseParser]:
 :
@@ -498,6 +503,51 @@ class DotNetParser((BaseParser)):
         ...
 ```
 
+## `parsers/go_driver.py`
+
+```py
+"""Tree-sitter Go parser driver."""
+
+import re
+from typing import List, Optional
+from codexslim.parsers.base_parser import BaseParser, Symbol
+
+class GoParser((BaseParser)):
+    """Extracts signatures, imports, and docstrings from Go source files."""
+
+    @property
+    def language_name(self) -> str:
+        ...
+
+    @property
+    def supported_extensions(self) -> List[str]:
+        ...
+
+    def get_signatures(self, source: str) -> List[Symbol]:
+        ...
+
+    def get_imports(self, source: str) -> List[str]:
+        ...
+
+    def _ts_signatures(self, source: str) -> List[Symbol]:
+        ...
+
+    def _walk_for_symbols(self, node, source: str, symbols: List[Symbol], parent: Optional[str]):
+        ...
+
+    def _ts_imports(self, source: str) -> List[str]:
+        ...
+
+    def _node_text(self, node, source: str) -> str:
+        ...
+
+    def _regex_signatures(self, source: str) -> List[Symbol]:
+        ...
+
+    def _regex_imports(self, source: str) -> List[str]:
+        ...
+```
+
 ## `parsers/java_driver.py`
 
 ```py
@@ -592,6 +642,96 @@ class PythonParser((BaseParser)):
         ...
 
     def _extract_module_docstring(self, source: str) -> Optional[str]:
+        ...
+
+    def _regex_signatures(self, source: str) -> List[Symbol]:
+        ...
+
+    def _regex_imports(self, source: str) -> List[str]:
+        ...
+```
+
+## `parsers/ruby_driver.py`
+
+```py
+"""Tree-sitter Ruby parser driver."""
+
+import re
+from typing import List, Optional
+from codexslim.parsers.base_parser import BaseParser, Symbol
+
+class RubyParser((BaseParser)):
+    """Extracts signatures, imports, and docstrings from Ruby source files."""
+
+    @property
+    def language_name(self) -> str:
+        ...
+
+    @property
+    def supported_extensions(self) -> List[str]:
+        ...
+
+    def get_signatures(self, source: str) -> List[Symbol]:
+        ...
+
+    def get_imports(self, source: str) -> List[str]:
+        ...
+
+    def _ts_signatures(self, source: str) -> List[Symbol]:
+        ...
+
+    def _walk_for_symbols(self, node, source: str, symbols: List[Symbol], parent: Optional[str]):
+        ...
+
+    def _ts_imports(self, source: str) -> List[str]:
+        ...
+
+    def _node_text(self, node, source: str) -> str:
+        ...
+
+    def _regex_signatures(self, source: str) -> List[Symbol]:
+        ...
+
+    def _regex_imports(self, source: str) -> List[str]:
+        ...
+```
+
+## `parsers/rust_driver.py`
+
+```py
+"""Tree-sitter Rust parser driver."""
+
+import re
+from typing import List, Optional
+from codexslim.parsers.base_parser import BaseParser, Symbol
+
+class RustParser((BaseParser)):
+    """Extracts signatures, imports, and docstrings from Rust source files."""
+
+    @property
+    def language_name(self) -> str:
+        ...
+
+    @property
+    def supported_extensions(self) -> List[str]:
+        ...
+
+    def get_signatures(self, source: str) -> List[Symbol]:
+        ...
+
+    def get_imports(self, source: str) -> List[str]:
+        ...
+
+    def _ts_signatures(self, source: str) -> List[Symbol]:
+        ...
+
+    def _walk_for_symbols(self, node, source: str, symbols: List[Symbol], parent: Optional[str]):
+        ...
+
+    def _ts_imports(self, source: str) -> List[str]:
+        ...
+
+    def _node_text(self, node, source: str) -> str:
         ...
 
     def _regex_signatures(self, source: str) -> List[Symbol]:

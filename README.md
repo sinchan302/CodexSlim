@@ -302,7 +302,9 @@ slim ./src --grace-period 0
 | Java | `.java`, `.gradle` | v1 — full support |
 | C# / .NET | `.cs`, `.csproj` | v1 — full support |
 | JavaScript / TypeScript | `.js`, `.ts`, `.jsx`, `.tsx` | v1 — full support |
-| Go, Rust, Ruby | various | v2 planned |
+| Go | `.go` | v2 — full support |
+| Rust | `.rs` | v2 — full support |
+| Ruby | `.rb` | v2 — full support |
 
 Files with no registered parser are passed through unchanged.
 
@@ -416,7 +418,10 @@ codexslim/
 │   ├── python_driver.py   # Tree-sitter Python parser
 │   ├── java_driver.py     # Tree-sitter Java parser
 │   ├── dotnet_driver.py   # Tree-sitter C# / .NET parser
-│   └── web_driver.py      # Tree-sitter JS/TS parser
+│   ├── web_driver.py      # Tree-sitter JS/TS parser
+│   ├── go_driver.py       # Tree-sitter Go parser
+│   ├── rust_driver.py     # Tree-sitter Rust parser
+│   └── ruby_driver.py     # Tree-sitter Ruby parser
 └── filters/
     ├── skeletonizer.py    # Converts ParseResult → slim source
     └── comment_pruner.py  # Strips inline comments
