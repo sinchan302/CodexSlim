@@ -12,8 +12,15 @@ from codexslim.filters.skeletonizer import Skeletonizer
 from codexslim.parsers.base_parser import BaseParser
 from codexslim.parsers.python_driver import PythonParser
 
+from codexslim.parsers.java_driver import JavaParser
+from codexslim.parsers.dotnet_driver import DotNetParser
+from codexslim.parsers.web_driver import WebDriver
+
 _DEFAULT_PARSERS: List[BaseParser] = [
     PythonParser(),
+    JavaParser(),
+    DotNetParser(),
+    WebDriver(),
 ]
 
 def _build_ext_map(parsers: List[BaseParser]) -> Dict[str, BaseParser]:
@@ -59,11 +66,11 @@ class SlimResult:
 
 
 class Engine:
-    def __init__(self, workspace_root, parsers=None, grace_seconds=86400,
+    def __init__(self, workspace_root, parsers=None, grace_hours=24.0,
                  tokenizer_backend="openai", use_cache=True):
         self._root = Path(workspace_root).resolve()
         self._ext_map = _build_ext_map(parsers or _DEFAULT_PARSERS)
-        self._cache = CacheManager(self._root, grace_seconds=grace_seconds) if use_cache else None
+        self._cache = CacheManager(self._root, grace_hours=grace_hours) if use_cache else None
         self._skeletonizer = Skeletonizer()
         self._tokenizer = Tokenizer()
         self._tokenizer_backend = tokenizer_backend
@@ -103,14 +110,14 @@ class Engine:
         cache_hit = False
         slim_source = None
         if self._cache:
-            slim_source = self._cache.get_digest(path)
+            slim_source = self._cache.get(path)
             if slim_source is not None:
                 cache_hit = True
         if slim_source is None:
             parse_result = parser.get_parse_result(path)
             slim_source = self._skeletonizer.skeletonize(parse_result)
             if self._cache:
-                self._cache.store_digest(path, slim_source)
+                self._cache.set(path, slim_source)
         token_reports = self._tokenizer.count(
             original_source, slim_source, backend=self._tokenizer_backend
         )

@@ -27,7 +27,7 @@ def main(target, fmt, out_path, dep_depth, grace_period, tokenizer, no_cache, ve
     workspace_root = target if target.is_dir() else target.parent
     engine = Engine(
         workspace_root=workspace_root,
-        grace_seconds=grace_period * 3600,
+        grace_hours=grace_period,
         tokenizer_backend=tokenizer,
         use_cache=not no_cache,
     )

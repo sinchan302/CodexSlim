@@ -287,9 +287,9 @@ slim ./src --grace-period 0
 | Language | Extensions | Status |
 |---|---|---|
 | Python | `.py` | v1 — full support |
-| Java | `.java`, `.gradle` | v1 — in progress |
-| C# / .NET | `.cs`, `.csproj` | v1 — in progress |
-| JavaScript / TypeScript | `.js`, `.ts`, `.jsx`, `.tsx` | v1 — in progress |
+| Java | `.java`, `.gradle` | v1 — full support |
+| C# / .NET | `.cs`, `.csproj` | v1 — full support |
+| JavaScript / TypeScript | `.js`, `.ts`, `.jsx`, `.tsx` | v1 — full support |
 | Go, Rust, Ruby | various | v2 planned |
 
 Files with no registered parser are passed through unchanged.
@@ -401,7 +401,10 @@ codexslim/
 │   └── tokenizer.py       # Token counting and savings report
 ├── parsers/
 │   ├── base_parser.py     # Abstract base: Symbol, ParseResult, BaseParser
-│   └── python_driver.py   # Tree-sitter Python parser
+│   ├── python_driver.py   # Tree-sitter Python parser
+│   ├── java_driver.py     # Tree-sitter Java parser
+│   ├── dotnet_driver.py   # Tree-sitter C# / .NET parser
+│   └── web_driver.py      # Tree-sitter JS/TS parser
 └── filters/
     ├── skeletonizer.py    # Converts ParseResult → slim source
     └── comment_pruner.py  # Strips inline comments
