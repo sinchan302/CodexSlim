@@ -56,7 +56,19 @@ git clone https://github.com/sinchan302/CodexSlim.git
 cd CodexSlim
 ```
 
-### 2. Create a virtual environment
+### Quick Setup
+
+For an instant one-click setup, just run the setup script. It will automatically check your Python environment, create a virtual environment, and install the library and dependencies:
+
+```bash
+./setup.sh
+```
+
+### Manual Setup (Alternative)
+
+If you prefer to set up the environment manually instead:
+
+**1. Create a virtual environment**
 
 ```bash
 python3 -m venv .venv
