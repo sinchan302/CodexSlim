@@ -203,6 +203,21 @@ slim ./src --no-cache --verbose
 
 ---
 
+## Benchmarks
+
+CodexSlim consistently achieves **70–90% token reduction** across supported languages by stripping raw implementations while perfectly isolating critical architectural signals.
+
+Below is a benchmark visualization targeting CodexSlim's own internal parsers and runtime engine components.
+
+![Token Reduction Benchmark](codexslim_benchmark_chart.png)
+
+You can run your own local project benchmarks at any time using the bundled utility:
+```bash
+python benchmark.py
+```
+
+---
+
 ## Python API
 
 ```python
